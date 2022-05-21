@@ -98,6 +98,7 @@ class ChatBot:
     else:
       self.sendResult(f"Chúng tôi chẩn đoán bạn bị mắc bệnh: {output_disease}")
     
+    self.chat = self.Predict()
     yield
 
   def sendAskMore(self, askmore):
