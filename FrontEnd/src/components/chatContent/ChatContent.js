@@ -29,6 +29,7 @@ export default class ChatContent extends Component {
 
   scrollToBottom = () => {
     this.messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    // this.messagesEndRef.scrollIntoView({ behavior: "smooth" });
   };
 
   componentDidMount() {
@@ -60,6 +61,9 @@ export default class ChatContent extends Component {
       this.setState({ chat: [...this.chatItems] });
       this.scrollToBottom();
     })
+  }
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
   onStateChange = (e) => {
     this.setState({ msg: e.target.value });
