@@ -36,18 +36,16 @@ class ChatBot:
     num_predict = 0
     list_symptom = []
     viet_to_eng(list_symptom, self.msg)
-
+    
     while num_predict < 5:
       # Prediction
       result = model.predict_input_symptoms(list_symptom)
-
       # Compare result
       if compare_result(previous_result, result):
         output_disease = result
         break
       # Get symptoms of predicted disease
       list_symptom_result = get_symptoms_disease(result)
-
       # Get symptoms to ask more
       ask_more = difference_symptoms(list_symptom, list_symptom_result)
       if len(ask_more) == 0:
@@ -61,9 +59,8 @@ class ChatBot:
       string_next = self.msg
       list_new_symptom = []
       viet_to_eng(list_new_symptom, string_next)
-
+      
       if len(list_new_symptom) == 0:
-        list_symptom += list_new_symptom
         second_result, third_result = model.predict_near_input_symptoms(list_symptom)
         list_symptom_second_result = get_symptoms_disease(second_result)
         ask_more = difference_symptoms(list_symptom, list_symptom_second_result)
@@ -75,10 +72,7 @@ class ChatBot:
         viet_to_eng(list_new_symptom, string_next)
         
         if len(list_new_symptom) == 0:
-          list_symptom += list_new_symptom
           list_symptom_third_result = get_symptoms_disease(third_result)
-          
-
           ask_more = difference_symptoms(list_symptom, list_symptom_third_result)
           
           self.sendAskMore(eng_to_vie(ask_more))

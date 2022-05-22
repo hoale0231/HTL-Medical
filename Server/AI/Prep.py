@@ -1,4 +1,4 @@
-from AI.Data.vie_end_simptom import vie, eng
+from AI.Data.vie_eng_symptom import vie, eng
 import regex as re
 
 def loaddicchar():
@@ -22,7 +22,7 @@ def viet_to_eng(list_symptom, string):
         for i, trieuchung in enumerate(vie):
             for tc in trieuchung:
                 if all([ word in s for word in tc.split(" ")]):
-                    return list_symptom.append(eng[i])
+                    list_symptom.append(eng[i])
 
 def eng_to_vie(list_symptom):
     return [vie[eng.index(s)][0] for s in list_symptom]
