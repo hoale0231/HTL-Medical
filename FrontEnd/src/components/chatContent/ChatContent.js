@@ -5,14 +5,14 @@ import Avatar from '../avatar/Avatar'
 import ChatItem from "./ChatItem";
 
 import image1 from '../../assets/image/guitar.jpg'
-import image2 from '../../assets/image/NTLinh.jpg'
+import image2 from '../../assets/image/icon.png'
 
 export default class ChatContent extends Component {
   messagesEndRef = createRef(null);
   chatItems = [
     {
       key: 1,
-      image: image1,
+      image: image2,
       type: "me",
       msg: "Xin chào, chúng mình là HTL Medical, hãy nêu các triệu chứng của bạn?",
     },    
