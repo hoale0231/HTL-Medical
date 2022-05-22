@@ -1,6 +1,6 @@
 from AI.NB import MultinominalNB
-from AI.Prep import viet_to_eng, eng_to_vie
-
+from AI.Prep import symptom_viet_to_eng, symptom_eng_to_vie
+from AI.Data.vie_eng import eng_vie_disease
 model = MultinominalNB()
 model.load('./AI/Model/NB_model.npy')
 
@@ -35,7 +35,7 @@ class ChatBot:
     previous_result = output_disease
     num_predict = 0
     list_symptom = []
-    viet_to_eng(list_symptom, self.msg)
+    symptom_viet_to_eng(list_symptom, self.msg)
     
     while num_predict < 5:
       # Prediction
@@ -52,33 +52,33 @@ class ChatBot:
         output_disease = result
         break
 
-      self.sendAskMore(eng_to_vie(ask_more))
+      self.sendAskMore(symptom_eng_to_vie(ask_more))
       yield
 
       # List new symptom --- GET FROM CHATBOX
       string_next = self.msg
       list_new_symptom = []
-      viet_to_eng(list_new_symptom, string_next)
+      symptom_viet_to_eng(list_new_symptom, string_next)
       
       if len(list_new_symptom) == 0:
         second_result, third_result = model.predict_near_input_symptoms(list_symptom)
         list_symptom_second_result = get_symptoms_disease(second_result)
         ask_more = difference_symptoms(list_symptom, list_symptom_second_result)
        
-        self.sendAskMore(eng_to_vie(ask_more))
+        self.sendAskMore(symptom_eng_to_vie(ask_more))
         yield
         string_next = self.msg
         list_new_symptom = []
-        viet_to_eng(list_new_symptom, string_next)
+        symptom_viet_to_eng(list_new_symptom, string_next)
         
         if len(list_new_symptom) == 0:
           list_symptom_third_result = get_symptoms_disease(third_result)
           ask_more = difference_symptoms(list_symptom, list_symptom_third_result)
           
-          self.sendAskMore(eng_to_vie(ask_more))
+          self.sendAskMore(symptom_eng_to_vie(ask_more))
           yield
           string_next = self.msg
-          viet_to_eng(list_new_symptom, string_next)
+          symptom_viet_to_eng(list_new_symptom, string_next)
           
       # List symptom after updating
       list_symptom += list_new_symptom
@@ -88,9 +88,10 @@ class ChatBot:
     if output_disease == "Can't predict!":
       second_result, third_result = model.predict_near_input_symptoms(list_symptom)
       self.sendResult("Chúng tôi không thể chẩn đoán chính xác")
-      self.sendResult(f"Bạn có khả năng mắc một trong ba bệnh sau: {previous_result}, {second_result}, {third_result}")
+      self.sendResult(f"Bạn có khả năng mắc một trong ba bệnh sau: {eng_vie_disease[previous_result.lower()]}, {eng_vie_disease[second_result.lower()]}, {eng_vie_disease[third_result.lower()]}")
     else:
-      self.sendResult(f"Chúng tôi chẩn đoán bạn bị mắc bệnh: {output_disease}")
+      self.sendResult(f"Chúng tôi chẩn đoán bạn bị mắc bệnh: {eng_vie_disease[output_disease.lower()]}")
+    self.sendResult('Bạn hãy chuyển sang trang "Bệnh và Phương Pháp Điều Trị" để xem cách điều trị nhé')
     
     self.chat = self.Predict()
     yield
