@@ -23,6 +23,7 @@ def symptom_viet_to_eng(list_symptom, string):
             for tc in trieuchung:
                 if all([ word in s for word in tc.split(" ")]):
                     list_symptom.append(eng_symptom[i])
-
+    list_symptom = list(set(list_symptom))
+    
 def symptom_eng_to_vie(list_symptom):
     return [vie_symptom[eng_symptom.index(s)][0] for s in list_symptom]
