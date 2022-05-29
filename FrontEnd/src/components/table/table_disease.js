@@ -61,9 +61,9 @@ let disease = [['phản ứng thuốc', 'ngừng dùng chất kích thích',
             'hạn chế dùng rượu bia'],
         ['bệnh trĩ', 'tránh thức ăn cay béo', 'tiêu thụ thuốc hazel',
             'tắm ấm với muối epsom', 'tiêu thụ nước ép alovera'],
-        ['cảm lạnh thông thường', 'uống vitamin c đồ uống giàu',
-            'lấy hơi', 'tránh thức ăn lạnh', 'giữ sốt khi kiểm tra'],
-        ['thủy đậu', 'sử dụng neem trong tắm', 'tiêu thụ lá neem',
+        ['cảm lạnh thông thường', 'uống đồ uống giàu vitamin c',
+            'lấy hơi', 'tránh thức ăn lạnh', 'chuẩn bị trước thuốc hạ sốt'],
+        ['thủy đậu', 'nấu lá neem để tắm',
             'tiêm vắc -xin', 'tránh những nơi công cộng'],
         ['thoái hóa đốt sống cổ', 'sử dụng miếng đệm sưởi hoặc gói lạnh',
             'tập thể dục', 'uống otc pain reliver',
@@ -124,7 +124,7 @@ export default function TableDisease() {
     return (
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
-            <caption>A basic table example with a caption</caption>
+            <caption>Trên đây là những phương pháp điều trị thông dụng, để chắc chắn về tình trạng của bệnh, bạn hãy đến trung tâm Y tế gần nhất để đảm bảo an toàn cho bản thân mình</caption>
             <TableHead>
             <TableRow>
                 <TableCell>TÊN BỆNH</TableCell>
