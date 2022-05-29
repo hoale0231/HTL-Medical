@@ -17,17 +17,19 @@ pip install -r requirements.txt
 
 For client machine
 ```
-cd 
+cd FrontEnd
 npm install
 ```
 
 ## Run the app:
 On the server, run:
 ```
-python Server/app.py
+cd Server
+python app.py
 ```
 
 For the client webapp, run:
 ```
+cd FrontEnd
 npm start
 ```
